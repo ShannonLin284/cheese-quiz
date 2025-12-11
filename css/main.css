@@ -46,7 +46,41 @@ body {
   bottom: 25vh;
   right: 10vw;
   border-radius: 999px;
+  transition: background-color 0.25s ease, opacity 0.25s ease; /* smooth hover */
+  cursor: pointer; /* makes it feel clickable */
 }
+
+/* Hover effect */
+.start_button_bg:hover {
+  background: rgba(200,170,120,1);  /* Lighter brown */
+  opacity: 0.8;
+}
+
+.start_button_bg:hover + .start_button_text {
+  color: white;
+}
+
+/* Wrapper makes entire button clickable */
+#start_button_wrapper {
+  position: absolute;
+  bottom: 25vh;
+  right: 10vw;
+  width: 30vw;
+  height: 10vh;
+  cursor: pointer;
+}
+
+/* Smooth color change on hover */
+#start_button_wrapper:hover .start_button_bg {
+  background: rgba(200,170,120,1);
+  opacity: 0.8;
+}
+
+#start_button_wrapper:hover .start_button_text {
+  color: white;
+}
+
+
 
 .start_button_text {
   position: absolute;
@@ -136,18 +170,6 @@ body {
 
 #quiz_option3_bg { top: 816px; }
 #quiz_option3_text { top: 828px; }
-
-/* Background frame inside quiz */
-.quiz_bg_frame {
-  width: 100%;
-  height: 924px;
-  background: url("../images/v5_67.png");
-  opacity: 0.5;
-  position: absolute;
-  top: 50px;
-  left: 56px;
-  border: 25px solid rgba(160,130,95,1);
-}
 
 /* Scenario prompt */
 .quiz_prompt {

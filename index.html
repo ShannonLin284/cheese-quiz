@@ -23,9 +23,11 @@
             Cheese?
         </span>
 
-        <div class="start_button_bg"></div>
-
-        <span class="start_button_text" id="start_button">Start</span>
+        <!-- Start Button Wrapper (hover + click area) -->
+        <div id="start_button_wrapper">
+            <div class="start_button_bg"></div>
+            <span class="start_button_text">Start</span>
+        </div>
 
         <div class="border_frame"></div>
         <div class="title_cheese"></div>
@@ -54,7 +56,7 @@
             <span class="quiz_option_text" id="quiz_option3_text">Option 3</span>
 
             <!-- BACKGROUND FRAME -->
-            <div class="quiz_bg_frame"></div>
+            <div class="border_frame"></div>
 
             <!-- SCENARIO PROMPT -->
             <span class="quiz_prompt">
@@ -74,7 +76,7 @@
     <!-- SCRIPT: SWITCH PAGES ON START   -->
     <!-- =============================== -->
     <script>
-        document.getElementById("start_button").onclick = function() {
+        document.getElementById("start_button_wrapper").onclick = function() {
             document.getElementById("landing_page").style.display = "none";
             document.getElementById("quiz_page").style.display = "block";
         };
