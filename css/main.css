@@ -1,92 +1,89 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 body {
   font-size: 14px;
-}
-.v1_2 {
-  width: 100%;
-  height: 1024px;
   background: rgba(250,240,188,1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
+  overflow-x: hidden;   /* prevents horizontal scrolling */
+  font-family: Inika, serif;
+}
+
+/* Wrap whole design and center it */
+.page_container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
   overflow: hidden;
 }
-.v4_2 {
-  width: 1000px;
-  color: rgba(0,0,0,1);
+
+/* Main title text */
+.title_text {
   position: absolute;
-  top: 177px;
-  left: 143px;
-  font-family: Inika;
-  font-weight: Regular;
-  font-size: 140px;
-  opacity: 1;
-  text-align: left;
+  top: 17vh;
+  left: 10vw;
+  font-size: 10vw;         /* scales with screen width */
+  line-height: 0.9;
+  width: 70vw;
 }
-.v4_4 {
-  width: 513px;
-  height: 150px;
+
+/* Start button background */
+.start_button_bg {
+  width: 30vw;
+  height: 10vh;
   background: rgba(160,129,95,1);
   opacity: 0.5;
   position: absolute;
-  top: 737px;
-  left: 759px;
-  border-top-left-radius: 167px;
-  border-top-right-radius: 167px;
-  border-bottom-left-radius: 167px;
-  border-bottom-right-radius: 167px;
-  overflow: hidden;
+  bottom: 25vh;
+  right: 10vw;
+  border-radius: 999px;
 }
-.v4_5 {
-  width: 642px;
-  color: rgba(0,0,0,1);
+
+/* Start button text */
+.start_button_text {
   position: absolute;
-  top: 748px;
-  left: 688px;
-  font-family: Inika;
-  font-weight: Regular;
-  font-size: 100px;
-  opacity: 1;
-  text-align: center;
+  bottom: 25vh;
+  right: 10vw;
+  width: 30vw;
+  height: 10vh;
+  font-size: 6vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* so clicks go through to the bg */
 }
-.v4_6 {
-  width: 100%;
-  height: 924px;
-  background: url("../images/v4_6.png");
-  opacity: 0.5;
+
+/* Decorative border frame */
+.border_frame {
   position: absolute;
-  top: 50px;
-  left: 56px;
-  border: 25px solid rgba(160,129,95,1);
+  inset: 3vw;  /* equal space on all sides */
+  
+  background: url("../images/squiggly_border.png")
+              center / 100% 100% no-repeat;
+
+  pointer-events: none; /* allows clicks through if needed */
 }
+
+
+
+/* Cheese image */
 .title_cheese {
-  width: 291px;
-  height: 276px;
-  background: url("../images/title_cheese.png");  /* rename the file too */
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
+  width: 20vw;
+  height: 20vw;
+  background: url("../images/title_cheese.png") center/cover no-repeat;
   position: absolute;
-  top: 599px;
-  left: 143px;
-  overflow: hidden;
+  bottom: 20vh;
+  left: 8vw;
 }
 
+/* Rats image */
 .title_lil_shan_rats {
-  width: 559px;
-  height: 456px;
-  background: url("../images/title_lil_shan_rats.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
+  width: 35vw;
+  height: 30vw;
+  background: url("../images/title_lil_shan_rats.png") center/cover no-repeat;
   position: absolute;
-  top: 118px;
-  left: 713px;
-  overflow: hidden;
+  top: 10vh;
+  right: 8vw;
 }
-
