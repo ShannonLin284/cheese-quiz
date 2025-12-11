@@ -62,10 +62,10 @@ body {
   left: 56px;
   border: 25px solid rgba(160,129,95,1);
 }
-.v12_44 {
+.title_cheese {
   width: 291px;
   height: 276px;
-  background: url("../images/v12_44.png");
+  background: url("../images/title_cheese.png");  /* rename the file too */
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -75,10 +75,11 @@ body {
   left: 143px;
   overflow: hidden;
 }
-.v44_3 {
+
+.title_lil_shan_rats {
   width: 559px;
   height: 456px;
-  background: url("../images/v44_3.png");
+  background: url("../images/title_lil_shan_rats.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
