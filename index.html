@@ -1,82 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <link href="https://fonts.googleapis.com/css?family=Inika&display=swap" rel="stylesheet" />
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Inika&display=swap"
+      rel="stylesheet"
+    />
     <link href="./css/main.css" rel="stylesheet" />
     <title>What’s Your Cheese?</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <!-- =============================== -->
     <!-- LANDING PAGE (VISIBLE AT START) -->
     <!-- =============================== -->
     <div id="landing_page" class="page_container">
+      <span class="title_text"> What’s Your Cheese? </span>
 
-        <span class="title_text">
-            What’s 
-            Your 
-            Cheese?
-        </span>
+      <!-- Start Button Wrapper -->
+      <div id="start_button_wrapper">
+        <div class="start_button_bg"></div>
+        <span class="start_button_text">Start</span>
+      </div>
 
-        <!-- Start Button Wrapper -->
-        <div id="start_button_wrapper">
-            <div class="start_button_bg"></div>
-            <span class="start_button_text">Start</span>
-        </div>
-
-        <div class="border_frame"></div>
-        <div class="title_cheese"></div>
-        <div class="title_lil_shan_rats"></div>
-
+      <div class="border_frame"></div>
+      <div class="title_cheese"></div>
+      <div class="title_lil_shan_rats"></div>
     </div>
-
 
     <!-- ============================== -->
     <!-- QUIZ PAGE (HIDDEN AT START)   -->
     <!-- ============================== -->
-    <div id="quiz_page" style="display:none;">
+    <div id="quiz_page" style="display: none">
+      <div class="quiz_container">
+        <!-- IMAGE BOX -->
+        <div class="quiz_image_box"></div>
 
-        <div class="quiz_container">
-
-            <!-- OPTION 1 -->
-            <div class="quiz_option_bg" id="quiz_option1_bg"></div>
-            <span class="quiz_option_text" id="quiz_option1_text">Option 1</span>
-
-            <!-- OPTION 2 -->
-            <div class="quiz_option_bg" id="quiz_option2_bg"></div>
-            <span class="quiz_option_text" id="quiz_option2_text">Option 2</span>
-
-            <!-- OPTION 3 -->
-            <div class="quiz_option_bg" id="quiz_option3_bg"></div>
-            <span class="quiz_option_text" id="quiz_option3_text">Option 3</span>
-
-            <!-- QUIZ BACKGROUND FRAME -->
-            <div class="border_frame"></div>
-
-            <!-- SCENARIO PROMPT -->
-            <span class="quiz_prompt">
-                Scenario 1: You got scooped up by a knife 
-                and stood on a sock monkey
-            </span>
-
-            <!-- IMAGE BOX -->
-            <div class="quiz_image_box"></div>
-
+        <!-- SCENARIO PROMPT -->
+        <div class="quiz_prompt">
+          Scenario 1: You got scooped up by a knife and stood on a sock monkey
         </div>
-
+        <div class="option_box">
+          <button class="quiz_option">Option 1</button>
+          <button class="quiz_option">Option 2</button
+          ><button class="quiz_option">Option 3</button>
+        </div>
+        <!-- QUIZ BACKGROUND FRAME -->
+        <!-- <div class="border_frame"></div> -->
+      </div>
     </div>
-
 
     <!-- =============================== -->
     <!-- SCRIPT: SWITCH PAGES ON START   -->
     <!-- =============================== -->
     <script>
-        document.getElementById("start_button_wrapper").onclick = function() {
-            document.getElementById("landing_page").style.display = "none";
-            document.getElementById("quiz_page").style.display = "block";
-        };
+      document.getElementById("start_button_wrapper").onclick = function () {
+        document.getElementById("landing_page").style.display = "none";
+        document.getElementById("quiz_page").style.display = "block";
+      };
     </script>
-
-</body>
+  </body>
 </html>

@@ -9,11 +9,10 @@
 
 body {
   font-size: 14px;
-  background: rgba(250,240,188,1);
+  background: rgba(250, 240, 188, 1);
   overflow-x: hidden;
   font-family: Inika, serif;
 }
-
 
 /* ============================================================
    LANDING PAGE
@@ -50,10 +49,12 @@ body {
 .start_button_bg {
   width: 100%;
   height: 100%;
-  background: rgba(160,129,95,1);
+  background: rgba(160, 129, 95, 1);
   opacity: 0.5;
   border-radius: 999px;
-  transition: background-color 0.25s ease, opacity 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    opacity 0.25s ease;
 }
 
 /* Start button text */
@@ -72,7 +73,7 @@ body {
 
 /* Hover effect */
 #start_button_wrapper:hover .start_button_bg {
-  background: rgba(200,170,120,1);
+  background: rgba(200, 170, 120, 1);
   opacity: 0.8;
 }
 
@@ -84,8 +85,7 @@ body {
 .border_frame {
   position: absolute;
   inset: 3vw;
-  background: url("../images/squiggly_border.png")
-              center / 100% 100% no-repeat;
+  background: url("../images/squiggly_border.png") center / contain no-repeat;
   pointer-events: none;
 }
 
@@ -108,73 +108,136 @@ body {
   right: 8vw;
 }
 
-
-
 /* ============================================================
    QUIZ PAGE
    ============================================================ */
 
 .quiz_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url("../images/squiggly_border.png") center/contain no-repeat;
+
+  max-width: 1000px;
+  width: calc(80% - 4vw);
+  min-height: calc(100vh - 4vh);
+  margin: 2vh auto;
+  position: relative;
+  padding: 5vh 10%;
+  gap: 25px;
+  box-sizing: border-box;
+}
+
+.option_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 1024px;
-  background: rgba(250,239,188,1);
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
+  max-width: 800px;
+  gap: 5px;
+  box-sizing: border-box;
 }
 
-/* Option button background */
-.quiz_option_bg {
-  width: 983px;
-  height: 77px;
-  background: rgba(160,129,95,1);
+.quiz_option {
+  width: 100%;
+  height: 50px;
+  background: rgba(160, 129, 95, 1);
   opacity: 0.5;
-  position: absolute;
-  left: 228px;
+  border: none;
   border-radius: 167px;
-}
-
-/* Option text */
-.quiz_option_text {
-  width: 689px;
+  font-family: Inika, serif;
+  font-size: clamp(16px, 3vw, 20px);
   color: #000;
-  position: absolute;
-  left: 357px;
-  font-family: Inika;
-  font-size: 35px;
   text-align: center;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition:
+    background 0.25s,
+    opacity 0.25s;
+  box-sizing: border-box;
+  padding: 0 20px;
 }
 
-/* Option positions */
-#quiz_option1_bg { top: 638px; }
-#quiz_option1_text { top: 650px; }
-
-#quiz_option2_bg { top: 727px; }
-#quiz_option2_text { top: 739px; }
-
-#quiz_option3_bg { top: 816px; }
-#quiz_option3_text { top: 828px; }
+.quiz_option:hover {
+  color: rgb(255, 255, 255);
+}
 
 /* Scenario prompt */
 .quiz_prompt {
-  width: 973px;
+  width: 100%;
+  max-width: 800px;
   color: #000;
-  position: absolute;
-  top: 488px;
-  left: 233px;
   font-family: Inika;
-  font-size: 50px;
+  font-size: clamp(18px, 3.5vw, 24px);
   text-align: center;
+  box-sizing: border-box;
+  padding: 0 10px;
 }
 
 /* Image box */
 .quiz_image_box {
-  width: 675px;
-  height: 337px;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 2 / 1;
   background: #000;
-  position: absolute;
-  top: 128px;
-  left: 382px;
   overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ------------------------
+   Mobile optimizations
+------------------------ */
+@media (max-width: 768px) {
+  .quiz_container {
+    width: 95%;
+    min-height: 100vh;
+    margin: 2vh auto;
+    padding: 3vh 5%;
+    gap: 20px;
+    box-sizing: border-box;
+    background: none;
+  }
+
+  .option_box {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .quiz_option {
+    height: 45px;
+    margin-bottom: 10px;
+    font-size: clamp(15px, 3vw, 16px);
+    border-radius: 100px;
+  }
+
+  .quiz_prompt {
+    font-size: clamp(16px, 4vw, 18px);
+  }
+
+  .quiz_image_box {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .quiz_container {
+    width: 98%;
+    min-height: 100vh;
+    margin: 1.5vh auto;
+    padding: 2vh 3%;
+    gap: 15px;
+    box-sizing: border-box;
+    background: none;
+  }
+
+  .quiz_option {
+    height: 40px;
+    font-size: clamp(14px, 3.5vw, 15px);
+  }
+
+  .quiz_prompt {
+    font-size: clamp(14px, 4vw, 16px);
+  }
 }
