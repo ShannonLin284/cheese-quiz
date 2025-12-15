@@ -35,7 +35,10 @@ body {
   width: 70vw;
 }
 
-/* Start button wrapper */
+/* ============================================================
+   START BUTTON
+   ============================================================ */
+
 #start_button_wrapper {
   position: absolute;
   bottom: 25vh;
@@ -43,9 +46,12 @@ body {
   width: 30vw;
   height: 10vh;
   cursor: pointer;
+
+  /* ✅ wobble lives here */
+  animation: cheese_wobble 3s ease-in-out infinite;
+  transform-origin: center;
 }
 
-/* Start button background */
 .start_button_bg {
   width: 100%;
   height: 100%;
@@ -57,13 +63,9 @@ body {
     opacity 0.25s ease;
 }
 
-/* Start button text */
 .start_button_text {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   font-size: 6vw;
   display: flex;
   justify-content: center;
@@ -71,7 +73,6 @@ body {
   pointer-events: none;
 }
 
-/* Hover effect */
 #start_button_wrapper:hover .start_button_bg {
   background: rgba(200, 170, 120, 1);
   opacity: 0.8;
@@ -81,7 +82,10 @@ body {
   color: white;
 }
 
-/* Decorative border */
+/* ============================================================
+   LANDING PAGE DECORATION
+   ============================================================ */
+
 .border_frame {
   position: absolute;
   inset: 3vw;
@@ -93,7 +97,7 @@ body {
 .title_cheese {
   width: 20vw;
   height: 20vw;
-  background: url("../images/title_cheese.png") center/cover no-repeat;
+  background: url("../images/title_cheese.png") center / cover no-repeat;
   position: absolute;
   bottom: 20vh;
   left: 8vw;
@@ -102,7 +106,7 @@ body {
 .title_lil_shan_rats {
   width: 35vw;
   height: 30vw;
-  background: url("../images/title_lil_shan_rats.png") center/cover no-repeat;
+  background: url("../images/title_lil_shan_rats.png") center / cover no-repeat;
   position: absolute;
   top: 10vh;
   right: 8vw;
@@ -117,12 +121,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: url("../images/squiggly_border.png") center/contain no-repeat;
+  background: url("../images/squiggly_border.png") center / contain no-repeat;
   height: 70%;
   position: relative;
-  padding: 5vh 10%;
+  padding: 8vh 10% 10vh;
   gap: 25px;
-  box-sizing: border-box;
 }
 
 .option_box {
@@ -131,8 +134,7 @@ body {
   align-items: center;
   width: 100%;
   max-width: 800px;
-  gap: 15px;
-  box-sizing: border-box;
+  gap: 8px;
 }
 
 .quiz_option {
@@ -144,13 +146,8 @@ body {
   border-radius: 167px;
   font-family: Inika, serif;
   font-size: clamp(16px, 3vw, 20px);
-  color: #000;
-  text-align: center;
   cursor: pointer;
-  transition:
-    background 0.25s,
-    opacity 0.25s;
-  box-sizing: border-box;
+  transition: background 0.25s, opacity 0.25s;
   padding: 0 20px;
 }
 
@@ -160,59 +157,57 @@ body {
 
 /* Scenario prompt */
 .quiz_prompt {
-  width: 100%;
   max-width: 800px;
-  color: #000;
-  font-family: Inika;
   font-size: clamp(18px, 3.5vw, 24px);
   text-align: center;
-  box-sizing: border-box;
-  padding: 0 10px;
 }
 
-/* Image box */
 .quiz_image_box {
+  position: relative;
   width: 100%;
-  max-width: 600px;
-  aspect-ratio: 2 / 1;
-  background: #000;
+  max-width: 620px;          /* slightly wider */
+  aspect-ratio: 2 / 1.7;
+
+  /* image control */
+  background-size: 98% 95%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  margin-top: 16px;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
-/* ------------------------
-   Mobile optimizations
------------------------- */
+/* squiggly border ABOVE image, no covering */
+.quiz_image_box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: url("../images/squiggly_border.png")
+              center / 100% 100% no-repeat;
+
+  pointer-events: none;
+  z-index: 2;
+}
+
+
+
+/* ============================================================
+   MOBILE OPTIMIZATION
+   ============================================================ */
+
 @media (max-width: 768px) {
   .quiz_container {
     width: 95%;
     min-height: 100vh;
     margin: 2vh auto;
     padding: 3vh 5%;
-    gap: 20px;
-    box-sizing: border-box;
     background: none;
-  }
-
-  .option_box {
-    width: 100%;
-    gap: 8px;
   }
 
   .quiz_option {
     height: 45px;
-    margin-bottom: 10px;
     font-size: clamp(15px, 3vw, 16px);
-    border-radius: 100px;
-  }
-
-  .quiz_prompt {
-    font-size: clamp(16px, 4vw, 18px);
-  }
-
-  .quiz_image_box {
-    width: 100%;
-    max-width: 100%;
   }
 }
 
@@ -222,8 +217,6 @@ body {
     min-height: 100vh;
     margin: 1.5vh auto;
     padding: 2vh 3%;
-    gap: 15px;
-    box-sizing: border-box;
     background: none;
   }
 
@@ -231,27 +224,19 @@ body {
     height: 40px;
     font-size: clamp(14px, 3.5vw, 15px);
   }
-
-  .quiz_prompt {
-    font-size: clamp(14px, 4vw, 16px);
-  }
 }
 
 /* ============================================================
-   QUIZ PAGE RESIZE SCALING
+   QUIZ PAGE SCALING
    ============================================================ */
 
 .quiz_centerer {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 }
 
-/* The base quiz size is designed around 1440px width */
 .quiz_scale_wrapper {
-  position: relative;
   width: 1440px;
   height: 1024px;
   transform-origin: top center;
@@ -259,34 +244,18 @@ body {
   margin: 2vh auto;
 }
 
-/* Dynamic scaling variable */
 :root {
   --quiz-scale: 1;
 }
 
 /* ============================================================
-   BORDER WOBBLE ANIMATION
+   WOBBLE ANIMATION (USED BY START BUTTON ONLY)
    ============================================================ */
 
 @keyframes cheese_wobble {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  25% {
-    transform: rotate(0.4deg) scale(1.01);
-  }
-  50% {
-    transform: rotate(0deg) scale(1);
-  }
-  75% {
-    transform: rotate(-0.4deg) scale(1.01);
-  }
-  100% {
-    transform: rotate(0deg) scale(1);
-  }
-}
-
-/* Apply wobble to both landing + quiz borders */
-.border_frame {
-  animation: cheese_wobble 3.5s ease-in-out infinite;
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(0.4deg) scale(1.01); }
+  50%  { transform: rotate(0deg) scale(1); }
+  75%  { transform: rotate(-0.4deg) scale(1.01); }
+  100% { transform: rotate(0deg) scale(1); }
 }
