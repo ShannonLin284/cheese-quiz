@@ -147,7 +147,9 @@ body {
   font-family: Inika, serif;
   font-size: clamp(16px, 3vw, 20px);
   cursor: pointer;
-  transition: background 0.25s, opacity 0.25s;
+  transition:
+    background 0.25s,
+    opacity 0.25s;
   padding: 0 20px;
 }
 
@@ -165,7 +167,7 @@ body {
 .quiz_image_box {
   position: relative;
   width: 100%;
-  max-width: 620px;          /* slightly wider */
+  max-width: 620px; /* slightly wider */
   aspect-ratio: 2 / 1.7;
 
   /* image control */
@@ -183,20 +185,24 @@ body {
   position: absolute;
   inset: 0;
 
-  background: url("../images/squiggly_border.png")
-              center / 100% 100% no-repeat;
+  background: url("../images/squiggly_border.png") center / 100% 100% no-repeat;
 
   pointer-events: none;
   z-index: 2;
 }
 
+.quiz_image {
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  box-sizing: border-box;
+}
 
-
-/* ============================================================
-   MOBILE OPTIMIZATION
-   ============================================================ */
-
-@media (max-width: 768px) {
+/* ------------------------
+   Mobile optimizations
+------------------------ */
+@media (max-width: 940px) {
   .quiz_container {
     width: 95%;
     min-height: 100vh;
@@ -253,9 +259,19 @@ body {
    ============================================================ */
 
 @keyframes cheese_wobble {
-  0%   { transform: rotate(0deg) scale(1); }
-  25%  { transform: rotate(0.4deg) scale(1.01); }
-  50%  { transform: rotate(0deg) scale(1); }
-  75%  { transform: rotate(-0.4deg) scale(1.01); }
-  100% { transform: rotate(0deg) scale(1); }
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(0.4deg) scale(1.01);
+  }
+  50% {
+    transform: rotate(0deg) scale(1);
+  }
+  75% {
+    transform: rotate(-0.4deg) scale(1.01);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
 }
