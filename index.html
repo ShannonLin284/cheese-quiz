@@ -550,7 +550,7 @@
       <div class="quiz_centerer">
         <div class="quiz_scale_wrapper">
           <div class="quiz_container">
-            <div class="quiz_image_box"></div>
+            <img src="images/15.png" class="quiz_image" />
             <div class="quiz_prompt">
               Scenario 15: The cheese reaper arrives to collect your wheyward
               soul
@@ -614,6 +614,28 @@
                 cheeses
               </button>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOADING -->
+    <div id="loading" style="display: none">
+      <div class="quiz_centerer">
+        <div class="quiz_scale_wrapper">
+          <div class="loading_container">
+            <div class="loading_text">Analyzing flavors...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="result" style="display: none">
+      <div class="quiz_centerer">
+        <div class="quiz_scale_wrapper">
+          <div class="result_container">
+            <img id="result_image" class="result_image" />
           </div>
         </div>
       </div>
@@ -706,12 +728,23 @@
             document.getElementById("quiz_page_" + currentPage).style.display =
               "block";
           } else {
-            alert(
-              "Quiz complete! Results: " +
-                JSON.stringify(quizScores) +
-                "You are: " +
-                cheeseResult(quizScores)
-            );
+            document.getElementById("loading").style.display = "block";
+
+            setTimeout(() => {
+              document.getElementById("loading").style.display = "none";
+              document.getElementById("result").style.display = "block";
+              const resultCheese = cheeseResult(quizScores);
+              const img = document.getElementById("result_image");
+              img.src = "images/" + resultCheese + ".png";
+              img.alt = resultCheese;
+            }, 3000);
+
+            // alert(
+            //   "Quiz complete! Results: " +
+            //     JSON.stringify(quizScores) +
+            //     "You are: " +
+            //     cheeseResult(quizScores)
+            // );
           }
         });
       });
