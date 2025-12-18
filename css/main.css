@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap");
+
 /* ============================================================
    GLOBAL RESET + BASE STYLES
    ============================================================ */
@@ -18,7 +20,7 @@ body {
   font-size: 14px;
   background: rgba(250, 240, 188, 1);
   overflow-x: hidden;
-  font-family: "Irish Grover", cursive;
+  font-family: "Irish Grover", sans-serif;
 }
 
 /* ============================================================
@@ -34,14 +36,14 @@ body {
 
 .title_text {
   position: absolute;
-  top: 10%;               
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
 
   max-width: 1000px;
   font-size: clamp(100px, 3.5vw, 24px);
   text-align: center;
- }
+}
 
 /* ============================================================
    START BUTTON
@@ -57,7 +59,6 @@ body {
   cursor: pointer;
   animation: cheese_wobble 3s ease-in-out infinite;
 }
-
 
 .start_button_bg {
   width: 100%;
@@ -119,7 +120,6 @@ body {
   transform: translateX(10%);
 }
 
-
 /* ============================================================
    QUIZ PAGE
    ============================================================ */
@@ -152,7 +152,7 @@ body {
   opacity: 0.5;
   border: none;
   border-radius: 167px;
-  font-family: "Irish Grover", cursive;
+  font-family: "Didact Gothic";
   font-size: clamp(16px, 3vw, 20px);
   cursor: pointer;
   transition:
