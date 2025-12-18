@@ -152,7 +152,7 @@ body {
   opacity: 0.5;
   border: none;
   border-radius: 167px;
-  font-family: Inika, serif;
+  font-family: "Irish Grover", cursive;
   font-size: clamp(16px, 3vw, 20px);
   cursor: pointer;
   transition:
