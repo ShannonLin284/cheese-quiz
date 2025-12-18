@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const namePage = document.getElementById("name_page");
   const startBtn = document.getElementById("start_button_wrapper");
   const nameInput = document.getElementById("name_input");
-  const nameContinue = document.getElementById("name_continue");
+  const nameContinue = document.getElementById("name_continue_wrapper");
 
   // Allow Enter key to submit name
   nameInput.addEventListener("keydown", (e) => {
