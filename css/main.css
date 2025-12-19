@@ -27,13 +27,6 @@ body {
    LANDING PAGE
    ============================================================ */
 
-.page_container {
-  width: 1440px;
-  height: 716px;
-  position: relative;
-  overflow: hidden;
-}
-
 .title_text {
   position: absolute;
   top: 20%;
@@ -41,13 +34,12 @@ body {
   transform: translateX(-50%);
 
   max-width: 1000px;
-  font-size: clamp(125px, 3.5vw, 24px);
+  font-size: clamp(110px, 3.5vw, 125px);
   text-align: center;
 }
 
 #landing_page {
-  height: 100vh;
-  overflow: hidden;
+  height: 105vh;
 }
 
 #landing_page .quiz_container {
@@ -59,6 +51,15 @@ body {
   max-width: 800px;
   font-size: clamp(18px, 3vw, 40px);
   text-align: center;
+}
+
+.disclaimer_text {
+  position: absolute;
+  top: 90%;
+  font-family: "Didact Gothic";
+  text-align: center;
+  font-size: clamp(14px, 3.5vw, 20px);
+  padding: 2px;
 }
 
 /* ============================================================
@@ -192,7 +193,7 @@ body {
 
 .title_lil {
   top: -10%;
-  left: -5%;
+  left: 0%;
   width: clamp(500px, 80vw, 1100px);
   aspect-ratio: 1 / 1;
   background: url("../images/lil.png") center / contain no-repeat;
@@ -204,8 +205,8 @@ body {
 }
 
 .title_shan {
-  top: -18%;
-  left: 20%;
+  top: -20%;
+  right: 5%;
   width: clamp(500px, 80vw, 1100px);
   aspect-ratio: 1 / 1;
   background: url("../images/shan.png") center / contain no-repeat;
@@ -368,12 +369,13 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .quiz_scale_wrapper {
   width: 1440px;
   height: 716px;
+  margin: 0 auto;
   transform-origin: top center;
   transform: scale(var(--quiz-scale));
   margin: 2vh auto;
@@ -445,10 +447,27 @@ body {
 /* ------------------------
    Mobile optimizations
 ------------------------ */
-@media (max-width: 940px) {
+@media (max-width: 1024px) {
+  .quiz_centerer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: visible;
+  }
+
+  .quiz_scale_wrapper {
+    width: 90vw;
+    max-width: 1440px;
+    height: auto;
+    transform-origin: top center;
+    transform: scale(var(--quiz-scale));
+    margin: 2vh auto;
+  }
+
   .quiz_container {
-    width: 95%;
-    min-height: 100vh;
+    width: 100%;
+    min-height: auto;
     margin: 2vh auto;
     padding: 3vh 5%;
     background: none;
@@ -458,12 +477,52 @@ body {
     height: 45px;
     font-size: clamp(15px, 3vw, 16px);
   }
+
+  .title_text {
+    font-size: clamp(100px, 8vw, 124px);
+    top: 5%;
+  }
+
+  .title_lil {
+    top: -25%;
+    left: -10%;
+    width: clamp(500px, 80vw, 1100px);
+    aspect-ratio: 1 / 1;
+    background: url("../images/lil.png") center / contain no-repeat;
+    position: absolute;
+
+    z-index: 1000;
+    pointer-events: none;
+    transform: translateX(-10%);
+  }
+
+  .title_shan {
+    top: -10%;
+    right: -3%;
+    width: clamp(500px, 80vw, 1100px);
+    aspect-ratio: 1 / 1;
+    background: url("../images/shan.png") center / contain no-repeat;
+    position: absolute;
+
+    z-index: 1000;
+    pointer-events: none;
+    transform: translateX(10%);
+  }
+
+  .name_prompt {
+    font-size: 6vw;
+  }
+
+  #start_button_wrapper {
+    width: 70vw;
+    height: 18vw;
+  }
 }
 
 @media (max-width: 480px) {
   .quiz_container {
-    width: 98%;
-    min-height: 100vh;
+    width: 100%;
+    min-height: auto;
     margin: 1.5vh auto;
     padding: 2vh 3%;
     background: none;
@@ -494,7 +553,7 @@ body {
 
   .title_shan {
     top: 20%;
-    left: -28%;
+    right: -8%;
     width: clamp(500px, 80vw, 1100px);
     aspect-ratio: 1 / 1;
     background: url("../images/shan.png") center / contain no-repeat;
@@ -510,8 +569,8 @@ body {
   }
 
   #start_button_wrapper {
-    width: 70vw; /* scale button width */
-    height: 18vw; /* scale button height */
+    width: 70vw;
+    height: 18vw;
   }
 
   #name_continue_wrapper {
@@ -534,5 +593,55 @@ body {
 
   .result_buttons {
     gap: 8px;
+  }
+
+  .loading_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: auto;
+  }
+
+  .loading_text {
+    font-family: "Irish Grover", cursive;
+    font-size: 24px;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  .result_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: auto;
+  }
+
+  .result_image {
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+}
+
+@media (orientation: landscape) {
+  body {
+    overflow-y: auto;
+  }
+
+  .quiz_centerer {
+    padding-top: 2vh;
   }
 }
