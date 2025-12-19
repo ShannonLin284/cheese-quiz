@@ -169,8 +169,8 @@ shareButton.addEventListener("click", async () => {
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
       await navigator.share({
         files: [file],
-        title: "What's Your Cheese?",
-        text: "Check out my cheese result!",
+        title: "The Cheese Quiz",
+        text: "Check out my cheese result!\nAll cheeses @ thecheesequiz.com 🧀",
       });
     } else {
       alert("Sharing not supported on this device. Try downloading instead!");

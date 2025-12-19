@@ -29,7 +29,7 @@ body {
 
 .page_container {
   width: 1440px;
-  height: 1024px;
+  height: 716px;
   position: relative;
   overflow: hidden;
 }
@@ -43,6 +43,16 @@ body {
   max-width: 1000px;
   font-size: clamp(125px, 3.5vw, 24px);
   text-align: center;
+}
+
+#landing_page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+#landing_page .quiz_container {
+  height: 716px;
+  min-height: unset;
 }
 
 .name_prompt {
@@ -127,11 +137,11 @@ body {
   color: white;
 }
 
-#name_continue:hover .start_button_bg {
+#name_continue_wrapper:hover .start_button_bg {
   background: rgba(200, 170, 120, 0.8);
 }
 
-#name_continue:hover .continue_button_text {
+#name_continue_wrapper:hover .continue_button_text {
   color: white;
 }
 
@@ -171,7 +181,7 @@ body {
   transition: background 0.25s;
 }
 
-.back_button button:hover {
+.back_button:hover {
   background: rgba(200, 170, 120, 0.8);
   color: white;
 }
@@ -181,7 +191,7 @@ body {
    ============================================================ */
 
 .title_lil {
-  top: 0%;
+  top: -10%;
   left: -5%;
   width: clamp(500px, 80vw, 1100px);
   aspect-ratio: 1 / 1;
@@ -194,7 +204,7 @@ body {
 }
 
 .title_shan {
-  top: -8%;
+  top: -18%;
   left: 20%;
   width: clamp(500px, 80vw, 1100px);
   aspect-ratio: 1 / 1;
@@ -216,7 +226,7 @@ body {
   align-items: center;
   justify-content: center;
   background: url("../images/Border.png") center / contain no-repeat;
-  height: 70%;
+  height: 100%;
   position: relative;
   padding: 8vh 10% 10vh;
   gap: 25px;
@@ -332,6 +342,23 @@ body {
   pointer-events: none;
   z-index: 2;
 }
+
+#all_cheeses .quiz_centerer {
+  height: auto;
+  min-height: 100vh;
+  overflow: visible;
+}
+
+#all_cheeses .quiz_scale_wrapper {
+  height: auto;
+  min-height: 716px;
+}
+
+#all_cheeses .result_container {
+  min-height: auto;
+  padding: 40px 20px;
+}
+
 /* ============================================================
    QUIZ PAGE SCALING
    ============================================================ */
@@ -340,11 +367,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .quiz_scale_wrapper {
   width: 1440px;
-  height: 1024px;
+  height: 716px;
   transform-origin: top center;
   transform: scale(var(--quiz-scale));
   margin: 2vh auto;
@@ -404,7 +433,7 @@ body {
   box-shadow: 0 0 0 4px rgba(200, 170, 120, 0.5);
 }
 
-.name_continue {
+.name_continue_wrapper {
   margin-top: 10px;
   width: 260px;
   height: 90px;
@@ -455,7 +484,7 @@ body {
     left: -20%;
     width: clamp(500px, 80vw, 1100px);
     aspect-ratio: 1 / 1;
-    background: url("/images/Lil.png") center / contain no-repeat;
+    background: url("../images/lil.png") center / contain no-repeat;
     position: absolute;
 
     z-index: 1000;
@@ -468,7 +497,7 @@ body {
     left: -28%;
     width: clamp(500px, 80vw, 1100px);
     aspect-ratio: 1 / 1;
-    background: url("/images/Shan.png") center / contain no-repeat;
+    background: url("../images/shan.png") center / contain no-repeat;
     position: absolute;
 
     z-index: 1000;
@@ -476,11 +505,7 @@ body {
     transform: translateX(10%);
   }
 
-  .start_button_text {
-    font-size: 8vw; /* bigger on small screens */
-  }
-
-  .continue_button_text {
+  .name_prompt {
     font-size: 6vw;
   }
 
@@ -489,8 +514,25 @@ body {
     height: 18vw; /* scale button height */
   }
 
-  #name_continue {
-    width: 70vw;
-    height: 18vw;
+  #name_continue_wrapper {
+    width: 40vw;
+    height: 13vw;
+  }
+
+  .continue_button_bg {
+    min-width: unset;
+    min-height: unset;
+  }
+
+  .start_button_text {
+    font-size: 8vw;
+  }
+
+  .continue_button_text {
+    font-size: 6vw;
+  }
+
+  .result_buttons {
+    gap: 8px;
   }
 }
