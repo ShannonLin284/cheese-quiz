@@ -114,10 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
       for (const k in pts) quizScores[k] += pts[k];
 
       const prev = currentPage++;
-      document.getElementById("quiz_page_" + prev).style.display = "none";
+      document.getElementById(`quiz_page_${prev}`).style.display = "none";
 
       if (currentPage <= 16) {
-        document.getElementById("quiz_page_" + currentPage).style.display = "block";
+        document.getElementById(`quiz_page_${currentPage}`).style.display = "block";
       } else {
         document.getElementById("loading").style.display = "block";
 
@@ -157,12 +157,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const blob = await (await fetch(resultImage.src)).blob();
     const file = new File([blob], "Cheese.png", { type: blob.type });
 
-    if (navigator.canShare({ files: [file] })) {
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
       navigator.share({
         files: [file],
         title: "The Cheese Quiz",
         text: "Check out my cheese result! 🧀",
       });
+    } else {
+      alert("Sharing not supported on this device");
     }
   });
 
@@ -176,8 +178,34 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("result").style.display = "block";
   });
 
+  /* ===============================
+   RECIPE VIEW (same page)
+  =============================== */
+  const recipeView = document.getElementById("recipe_view");
+  const recipeImage = document.getElementById("recipe_image");
+  const recipeBackButton = document.getElementById("recipe_back_button");
+  const resultView = document.getElementById("result");
+
   recipeButton.addEventListener("click", () => {
-    if (!finalCheeseName) return alert("Your recipe is still cooking 🧀");
-    window.open(`images/${finalCheeseName} Recipe.png`, "_blank");
+    if (!finalCheeseName) {
+      alert("Your recipe is still cooking 🧀");
+      return;
+    }
+
+    // hide result
+    resultView.style.display = "none";
+
+    // show recipe view
+    recipeView.style.display = "block";
+
+    // load recipe image (encode handles spaces safely)
+    recipeImage.src = encodeURI(`images/${finalCheeseName} Recipe.png`);
+    recipeImage.alt = `${finalCheeseName} Recipe`;
   });
+
+  recipeBackButton.addEventListener("click", () => {
+    recipeView.style.display = "none";
+    resultView.style.display = "block";
+  });
+
 });
