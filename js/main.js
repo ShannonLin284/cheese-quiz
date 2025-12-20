@@ -5,11 +5,12 @@
 
 import { setPlayerName, logPlay } from "./firebase-backend.js";
 
+let finalCheeseName = null;
+
 document.addEventListener("DOMContentLoaded", () => {
   /* ===============================
      QUIZ STATE
   ================================ */
-  let finalCheeseName = null; // ✅ ADDED
   let quizScores = { I: 0, E: 0, T: 0, F: 0, A: 0, G: 0, H: 0, S: 0 };
   let currentPage = 0;
 
@@ -56,9 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const nameContinue = document.getElementById("name_continue_wrapper");
 
   nameInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      nameContinue.click();
-    }
+    if (e.key === "Enter") nameContinue.click();
   });
 
   startBtn.addEventListener("click", () => {
@@ -71,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!name) return alert("Please enter a name");
 
     setPlayerName(name);
-
     namePage.style.display = "none";
     currentPage = 1;
     document.getElementById("quiz_page_1").style.display = "block";
@@ -104,7 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
         bestCheese = Cheeses[key];
       }
     }
-
     return bestCheese;
   }
 
@@ -112,20 +109,15 @@ document.addEventListener("DOMContentLoaded", () => {
      QUIZ BUTTON HANDLING
   ================================ */
   document.querySelectorAll(".quiz_option").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      if (!btn.dataset.points) return;
-
+    btn.addEventListener("click", () => {
       const pts = JSON.parse(btn.dataset.points);
       for (const k in pts) quizScores[k] += pts[k];
 
-      const prev = currentPage;
-      currentPage++;
-
+      const prev = currentPage++;
       document.getElementById("quiz_page_" + prev).style.display = "none";
 
       if (currentPage <= 16) {
-        document.getElementById("quiz_page_" + currentPage).style.display =
-          "block";
+        document.getElementById("quiz_page_" + currentPage).style.display = "block";
       } else {
         document.getElementById("loading").style.display = "block";
 
@@ -133,83 +125,59 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById("loading").style.display = "none";
           document.getElementById("result").style.display = "block";
 
-          const cheese = cheeseResult(quizScores);
-          finalCheeseName = cheese; // ✅ ADDED
-
+          finalCheeseName = cheeseResult(quizScores);
           const img = document.getElementById("result_image");
-          img.src = "images/" + cheese + ".png";
-          img.alt = cheese;
+          img.src = `images/${finalCheeseName}.png`;
+          img.alt = finalCheeseName;
 
-          await logPlay(cheese);
+          await logPlay(finalCheeseName);
         }, 3000);
       }
     });
   });
-});
 
-/* ===============================
-   RESULT BUTTONS
-=============================== */
-const downloadButton = document.getElementById("download_button");
-const shareButton = document.getElementById("share_button");
-const resultImage = document.getElementById("result_image");
-const allCheesesButton = document.getElementById("all_cheeses_button");
-const backButton = document.getElementById("back_button");
-const recipeButton = document.getElementById("recipe_button"); // ✅ ADDED
+  /* ===============================
+     RESULT BUTTONS
+  ================================ */
+  const downloadButton = document.getElementById("download_button");
+  const shareButton = document.getElementById("share_button");
+  const resultImage = document.getElementById("result_image");
+  const allCheesesButton = document.getElementById("all_cheeses_button");
+  const backButton = document.getElementById("back_button");
+  const recipeButton = document.getElementById("recipe_button");
 
-downloadButton.addEventListener("click", () => {
-  const link = document.createElement("a");
-  link.href = resultImage.src;
-  link.download = "Cheese.png";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-});
+  downloadButton.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.href = resultImage.src;
+    link.download = "Cheese.png";
+    link.click();
+  });
 
-shareButton.addEventListener("click", async () => {
-  try {
-    const response = await fetch(resultImage.src);
-    const blob = await response.blob();
+  shareButton.addEventListener("click", async () => {
+    const blob = await (await fetch(resultImage.src)).blob();
     const file = new File([blob], "Cheese.png", { type: blob.type });
 
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      await navigator.share({
+    if (navigator.canShare({ files: [file] })) {
+      navigator.share({
         files: [file],
         title: "The Cheese Quiz",
-        text: "Check out my cheese result!\nAll cheeses @ thecheesequiz.com 🧀",
+        text: "Check out my cheese result! 🧀",
       });
-    } else {
-      alert("Sharing not supported on this device. Try downloading instead!");
     }
-  } catch (err) {
-    console.error("Share failed:", err);
-  }
-});
+  });
 
-allCheesesButton.addEventListener("click", () => {
-  document.getElementById("result").style.display = "none";
-  document.getElementById("all_cheeses").style.display = "block";
-});
+  allCheesesButton.addEventListener("click", () => {
+    document.getElementById("result").style.display = "none";
+    document.getElementById("all_cheeses").style.display = "block";
+  });
 
-backButton.addEventListener("click", () => {
-  document.getElementById("all_cheeses").style.display = "none";
-  document.getElementById("result").style.display = "block";
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const recipeButton = document.getElementById("recipe_button");
-  const recipeImage = document.getElementById("recipe_image");
+  backButton.addEventListener("click", () => {
+    document.getElementById("all_cheeses").style.display = "none";
+    document.getElementById("result").style.display = "block";
+  });
 
   recipeButton.addEventListener("click", () => {
-    if (!finalCheeseName) {
-      alert("Your recipe is still cooking");
-      return;
-    }
-
-    recipeImage.src = `images/${finalCheeseName} Recipe.png`;
-    recipeImage.style.display = "block";
+    if (!finalCheeseName) return alert("Your recipe is still cooking 🧀");
+    window.open(`images/${finalCheeseName} Recipe.png`, "_blank");
   });
 });
-
-
-
