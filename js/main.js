@@ -117,7 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById(`quiz_page_${prev}`).style.display = "none";
 
       if (currentPage <= 16) {
-        document.getElementById(`quiz_page_${currentPage}`).style.display = "block";
+        document.getElementById(`quiz_page_${currentPage}`).style.display =
+          "block";
       } else {
         document.getElementById("loading").style.display = "block";
 
@@ -161,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navigator.share({
         files: [file],
         title: "The Cheese Quiz",
-        text: "Check out my cheese result! 🧀",
+        text: "Check out my cheese result! 🧀\n(thecheesequiz.com)",
       });
     } else {
       alert("Sharing not supported on this device");
@@ -184,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const recipeView = document.getElementById("recipe_view");
   const recipeImage = document.getElementById("recipe_image");
   const recipeBackButton = document.getElementById("recipe_back_button");
+  const recipeSaveButton = document.getElementById("recipe_save_button");
   const resultView = document.getElementById("result");
 
   recipeButton.addEventListener("click", () => {
@@ -208,4 +210,10 @@ document.addEventListener("DOMContentLoaded", () => {
     resultView.style.display = "block";
   });
 
+  recipeSaveButton.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.href = recipeImage.src;
+    link.download = "Recipe.png";
+    link.click();
+  });
 });

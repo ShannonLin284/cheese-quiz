@@ -262,7 +262,6 @@ body {
   color: white;
 }
 
-/* Scenario prompt */
 .quiz_prompt {
   max-width: 800px;
   font-size: clamp(18px, 3.5vw, 24px);
@@ -448,14 +447,6 @@ body {
    Mobile optimizations
 ------------------------ */
 @media (max-width: 1024px) {
-  .quiz_centerer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: visible;
-  }
-
   .quiz_scale_wrapper {
     width: 90vw;
     max-width: 1440px;
@@ -541,27 +532,11 @@ body {
   .title_lil {
     top: 20%;
     left: -20%;
-    width: clamp(500px, 80vw, 1100px);
-    aspect-ratio: 1 / 1;
-    background: url("../images/lil.png") center / contain no-repeat;
-    position: absolute;
-
-    z-index: 1000;
-    pointer-events: none;
-    transform: translateX(-10%);
   }
 
   .title_shan {
     top: 20%;
     right: -8%;
-    width: clamp(500px, 80vw, 1100px);
-    aspect-ratio: 1 / 1;
-    background: url("../images/shan.png") center / contain no-repeat;
-    position: absolute;
-
-    z-index: 1000;
-    pointer-events: none;
-    transform: translateX(10%);
   }
 
   .name_prompt {
@@ -592,47 +567,23 @@ body {
   }
 
   .result_buttons {
-    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    justify-items: center;
+  }
+
+  .result_buttons button {
+    width: 100%;
+    max-width: none;
   }
 
   .loading_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     min-height: auto;
-  }
-
-  .loading_text {
-    font-family: "Irish Grover", cursive;
-    font-size: 24px;
-    animation: pulse 1.5s infinite;
-  }
-
-  @keyframes pulse {
-    0% {
-      opacity: 0.3;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0.3;
-    }
   }
 
   .result_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     min-height: auto;
-  }
-
-  .result_image {
-    width: 100%;
-    max-width: 600px;
-    overflow: hidden;
-    box-sizing: border-box;
   }
 }
 
