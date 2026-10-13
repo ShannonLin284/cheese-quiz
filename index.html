@@ -666,6 +666,15 @@
               <button id="download_button">Save</button>
               <button id="share_button">Share</button>
             </div>
+
+            <section class="stats-panel">
+              <h2>Stats</h2>
+              <p>See what cheese everyone got!</p>
+              <div class="chart-container">
+                <canvas id="cheese-chart"></canvas>
+              </div>
+              <p id="stats-error" hidden>Couldn't load cheese stats 😿</p>
+            </section>
           </div>
         </div>
       </div>
@@ -742,5 +751,93 @@
     <!-- =============================== -->
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="analytics/count.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="module">
+      import { getCheeseStats } from "./js/firebase-backend.js";
+
+      async function renderCheeseStats() {
+        try {
+          const counts = await getCheeseStats();
+          const total = Object.values(counts).reduce(
+            (sum, count) => sum + count,
+            0,
+          );
+
+          const cheeses = Object.keys(counts).sort(
+            (a, b) => counts[b] - counts[a],
+          );
+
+          const percentages = cheeses.map((cheese) =>
+            total ? (counts[cheese] / total) * 100 : 0,
+          );
+
+          const maxPercent = Math.ceil(Math.max(...percentages) / 10) * 10;
+
+          new Chart(document.getElementById("cheese-chart"), {
+            type: "bar",
+            data: {
+              labels: cheeses,
+              datasets: [
+                {
+                  label: "Percentage of players",
+                  data: percentages,
+                  backgroundColor: cheeses.map((cheese) => {
+                    const colors = {
+                      Brie: "#C8E68E",
+                      Mozzarella: "#F5AB9D",
+                      "Blue Cheese": "#DFB9D8",
+                      American: "#B2C7EE",
+                      "Cottage Cheese": "#F8BD86",
+                      "Goat Cheese": "#ABEACD",
+                      Feta: "#EFBBC3",
+                      Mascarpone: "#D7A77D",
+                      Ricotta: "#FBCA70",
+                      Manchego: "#C5C4EA",
+                      Gouda: "#B2E6EE",
+                      Cheddar: "#FF9BCB",
+                    };
+
+                    return colors[cheese] || "#CCCCCC";
+                  }),
+                  borderRadius: 6,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => `${context.parsed.y.toFixed(1)}%`,
+                  },
+                },
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: maxPercent || 10,
+                  ticks: {
+                    callback: (value) => `${value}%`,
+                  },
+                  title: {
+                    display: true,
+                    text: "Percentage of quiz plays",
+                  },
+                },
+              },
+            },
+          });
+        } catch (error) {
+          console.error("Failed to load cheese stats:", error);
+          document.getElementById("stats-error").hidden = false;
+        }
+      }
+
+      renderCheeseStats();
+    </script>
   </body>
 </html>

@@ -9,7 +9,8 @@ import {
   getFirestore,
   collection,
   addDoc,
-  serverTimestamp
+  getDocs,
+  serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -18,7 +19,7 @@ const firebaseConfig = {
   projectId: "cheese-quiz",
   storageBucket: "cheese-quiz.appspot.com",
   messagingSenderId: "864856413736",
-  appId: "1:864856413736:web:4055d3014a4a46055e471d"
+  appId: "1:864856413736:web:4055d3014a4a46055e471d",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -40,8 +41,24 @@ export async function logPlay(cheese) {
   await addDoc(collection(db, "plays"), {
     name,
     cheese,
-    timestamp: serverTimestamp()
+    timestamp: serverTimestamp(),
   });
 
   console.log("Logged play:", name, cheese);
+}
+
+// Get the number of players for each cheese
+export async function getCheeseStats() {
+  const snapshot = await getDocs(collection(db, "plays"));
+  const counts = {};
+
+  snapshot.forEach((doc) => {
+    const { cheese } = doc.data();
+
+    if (cheese) {
+      counts[cheese] = (counts[cheese] || 0) + 1;
+    }
+  });
+
+  return counts;
 }
